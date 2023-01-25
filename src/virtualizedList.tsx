@@ -10,12 +10,11 @@ export function VirtualizedList() {
   const handleScroll = () => {
     const { scrollTop, clientHeight, scrollHeight } = listRef.current!;
     // Check if the user has scrolled to the bottom of the list
-    // console.log(listRef.current)
+    console.log(scrollHeight, "SRCOLL SHT")
     if (scrollTop + clientHeight >= scrollHeight) {
       console.log(scrollTop, clientHeight, scrollHeight ,"WTFFF");
       console.log("HIT SCROLL");
       if(!blockFecth){
-
         handleNextPage();
       }
     }
@@ -32,13 +31,27 @@ export function VirtualizedList() {
     listRef.current.addEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {console.log(list, "LIST ON LIST")}, [list])
-
   return (
-    <div ref={listRef} onScroll={handleScroll} style={{height: "500px", overflow: "scroll"}}>
+    <>
+    <div ref={listRef} onScroll={handleScroll} style={ {width:'100%', overflow: "scroll", borderTop: '1px solid'}}>
+      
+        <div style={{display: 'flex', width: '100%', height: "55px"}}>
+          <div style={{flex: '1', textAlign: 'center', borderLeft: '1px solid', borderRight: '1px solid'}}>Name"</div>
+          <div style={{flex: '1' , textAlign: 'center', borderRight: '1px solid'}}>Description</div>
+          <div style={{flex: '1' , textAlign: 'center', borderRight: '1px solid'}}>Price</div>
+          </div>
+    
+    </div>
+    <div ref={listRef} onScroll={handleScroll} style={
+      {width:'100%', height: "500px", overflow: "scroll", borderBottom: '1px solid', borderTop: '1px solid'}}>
       {list.map((item, index) => (
-        <div key={index}>{item.name}</div>
+        <div key={index} style={{display: 'flex', width: '100%', borderBottom: '1px solid'}}>
+          <div style={{flex: '1', textAlign: 'center', borderLeft: '1px solid', borderRight: '1px solid'}}>{item.name}</div>
+          <div style={{flex: '1' , textAlign: 'center', borderRight: '1px solid'}}>{item.description}</div>
+          <div style={{flex: '1' , textAlign: 'center', borderRight: '1px solid'}}>{item.price}</div>
+          </div>
       ))}
     </div>
+    </>
   );
 }
