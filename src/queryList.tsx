@@ -31,9 +31,6 @@ class ListGenerator {
       const { value, done } = this.generator.next();
       this.list.push(value);
     }
-    console.log(this.list, "this list")
-    debugger
-    
     return this.list;
   }
 }
@@ -43,21 +40,13 @@ export const useList = (initialPageSize: number, initialPageNumber: number) => {
   const [list, setList] = useState<ListItem[]>(listGenerator.getNext(100));
   const [pageNumber, setPageNumber] = useState(initialPageNumber);
   const handleNextPage = () => {
-    console.log(pageNumber);
     setPageNumber(pageNumber + 1);
   };
   useEffect(() => {
-    console.log(pageNumber, "changed");
-    console.log(initialPageSize, "page size");
     if(pageNumber>1) {
-      console.log(initialPageSize * pageNumber, "items quantituy displayng");
       setList(listGenerator.getNext(initialPageSize * pageNumber));
     }
   }, [pageNumber]);
-
-  useEffect(() => {
-    console.log(list, "HOOK updated")
-  }, [list])
 
   return { list, handleNextPage };
 };

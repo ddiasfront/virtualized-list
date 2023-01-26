@@ -10,10 +10,7 @@ export function VirtualizedList() {
   const handleScroll = () => {
     const { scrollTop, clientHeight, scrollHeight } = listRef.current!;
     // Check if the user has scrolled to the bottom of the list
-    console.log(scrollHeight, "SRCOLL SHT")
     if (scrollTop + clientHeight >= scrollHeight - 50) {
-      console.log(scrollTop, clientHeight, scrollHeight ,"WTFFF");
-      console.log("HIT SCROLL");
       if(!blockFecth){
         handleNextPage();
       }
@@ -21,7 +18,6 @@ export function VirtualizedList() {
   };
   useEffect(() => {
     const { scrollTop, clientHeight, scrollHeight } = listRef.current!;
-    console.log("scroll height", scrollTop, clientHeight, scrollHeight);
     
     if(scrollTop + clientHeight <= scrollHeight - 50){
       setBlockFetch(false)
