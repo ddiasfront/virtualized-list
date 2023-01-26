@@ -1,7 +1,12 @@
 import { useQuery, useQueryClient } from "react-query";
 import { faker } from "@faker-js/faker";
-import { ListItem } from "./virtualizedList";
 import { useEffect, useState } from "react";
+
+declare interface ListItem {
+  name: string;
+  description: string;
+  price: string;
+}
 
 class ListGenerator {
   private generator: IterableIterator<ListItem>;
